@@ -1,0 +1,73 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2758
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;\f1\fmodern\fcharset0 CourierNewPS-BoldMT;}
+{\colortbl;\red255\green255\blue255;\red159\green242\blue92;}
+{\*\expandedcolortbl;;\cssrgb\c67668\c94348\c43431;}
+\margl1440\margr1440\vieww25400\viewh14380\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs36 \cf2 gun.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg));\
+
+\fs24 \cf0 \
+\
+\
+This line of code is used to rotate a game object (presumably a gun) so that it points towards a given direction. Here's an explanation of each part of the line:\
+\
+
+\f1\b 1. gun.rotation:
+\f0\b0 \
+   - This sets the rotation property of the `gun` object. The `rotation` property expects a `Quaternion`, which is a complex number used to represent rotations in 3D space.\
+\
+
+\f1\b 2. Quaternion.Euler(new Vector3(0, 0, ...)):
+\f0\b0 \
+   - `Quaternion.Euler` creates a rotation from Euler angles, which are more intuitive for humans to understand. Euler angles specify rotations around the x, y, and z axes.\
+   - `new Vector3(0, 0, ...)` creates a vector with the specified angles for the x, y, and z axes. Here, we're setting the x and y angles to 0, meaning there is no rotation around these axes. The z angle is calculated in the next part of the line.\
+\
+
+\f1\b 3. Mathf.Atan2(direction.y, direction.x):
+\f0\b0 \
+   - `Mathf.Atan2` is a mathematical function that returns the angle in radians between the positive x-axis and the point `(direction.x, direction.y)`.\
+   - This function is used to find the angle needed to rotate the gun so that it points in the direction specified by the `direction` vector. It correctly handles the signs of the `x` and `y` components to determine the correct quadrant of the angle.\
+\
+
+\f1\b 4. Mathf.Rad2Deg:
+\f0\b0 \
+   - This is a constant provided by Unity that converts radians to degrees. `Mathf.Atan2` returns an angle in radians, but `Quaternion.Euler` expects degrees, so we multiply by `Mathf.Rad2Deg` to convert the angle.\
+\
+
+\f1\b Putting It All Together:
+\f0\b0 \
+\
+- **Calculate the Angle**: `Mathf.Atan2(direction.y, direction.x)` calculates the angle in radians between the positive x-axis and the direction vector.\
+- **Convert to Degrees**: `Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg` converts this angle to degrees.\
+- **Set the Rotation**: `Quaternion.Euler(new Vector3(0, 0, angle))` creates a quaternion representing a rotation around the z-axis by the calculated angle.\
+- **Apply to Gun**: `gun.rotation = ...` sets the gun's rotation to this new rotation, making the gun point in the specified direction.\
+\
+This line effectively rotates the gun to face the direction vector specified by `direction`, ensuring that the gun points towards a target or direction in a 2D plane.\
+\
+\
+\
+\
+\
+
+\fs36 \cf2 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+\fs24 \cf0 \
+```\
+\
+This line calculates the angle in degrees between the positive x-axis and the vector defined by `direction`.\
+\
+1. **`Mathf.Atan2(direction.y, direction.x)`**:\
+   - `Mathf.Atan2` is a function that returns the angle in radians between the positive x-axis and the point `(direction.x, direction.y)`.\
+   - It takes two arguments: `direction.y` (the y-coordinate of the direction vector) and `direction.x` (the x-coordinate of the direction vector).\
+   - The function computes the arctangent of `direction.y/direction.x`, considering the signs of both arguments to determine the correct quadrant of the resulting angle. This helps to accurately represent the direction of the vector.\
+\
+2. **`Mathf.Rad2Deg`**:\
+   - This is a constant provided by Unity that converts radians to degrees.\
+   - Since `Mathf.Atan2` returns an angle in radians, multiplying by `Mathf.Rad2Deg` converts this angle to degrees. The value of `Mathf.Rad2Deg` is approximately `57.2958`.\
+\
+### Putting It All Together:\
+- The expression `Mathf.Atan2(direction.y, direction.x)` calculates the angle in radians.\
+- Multiplying this result by `Mathf.Rad2Deg` converts the angle from radians to degrees.\
+- The final value is stored in the variable `angle`.\
+\
+This variable `angle` now holds the angle in degrees between the positive x-axis and the vector specified by `direction`. This is useful in many scenarios, such as rotating an object to face a certain direction in a 2D game.}
